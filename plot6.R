@@ -35,8 +35,13 @@ library(dplyr)
 
 LAEmissions <- filter(NEI, fips == "06037")
 str(LAEmissions)
+LAEmissions$Code <- "Los Angeles"
+str(LAEmissions)
+
 
 BaltimoreEmissions <- filter(NEI, fips == "24510")
+str(BaltimoreEmissions)
+BaltimoreEmissions$Code <- "Baltimore"
 str(BaltimoreEmissions)
 
 detach(package:dplyr, unload=TRUE)
@@ -57,7 +62,7 @@ str(motorVehiclesLABaltimore)                           # There are 4050 observa
 
 library(plyr)
 
-totalMotorVLABaltimore <- ddply(motorVehiclesLABaltimore, .(year, fips), summarise, Emissions = sum(Emissions))
+totalMotorVLABaltimore <- ddply(motorVehiclesLABaltimore, .(year, Code), summarise, Emissions = sum(Emissions))
 head(totalMotorVLABaltimore, 8)
 
 # Lets plot and examine trends
@@ -68,9 +73,9 @@ png("plot6.png", width=640, height=640)
 
 library(ggplot2)
 
-g <- qplot(year, Emissions, data = totalMotorVLABaltimore, color = fips)
+g <- qplot(year, Emissions, data = totalMotorVLABaltimore, color = Code)
 
-g +  facet_grid (.~ fips) + geom_smooth(method = "lm") + labs(title = "Emissions from Motor Vehicles in LA & Baltimore [1999, 2002, 2005, 2008]") + labs(x = "Year", y = "Total Emissions [in tons]")
+g +  facet_grid (.~ Code) + geom_point(size = 3) + geom_smooth(method = "lm") + labs(title = "Emissions from Motor Vehicles in LA & Baltimore [1999, 2002, 2005, 2008]") + labs(x = "Year", y = "Total Emissions [in tons]")
 
 # The rate of change of emissions from motor vehicles in LA is greater than the rate of change in Baltimore.
 # The magnitude of emissions from motor vehicles in LA is far greater than those in Baltimore.

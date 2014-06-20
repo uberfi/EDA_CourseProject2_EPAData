@@ -86,7 +86,7 @@ png("plot5.png", width=560, height=560)
 library(ggplot2)
 
 g <- qplot(year, Emissions, data = totalMotorVBaltimore)
-g + geom_point(color = "steelblue") + geom_smooth(method = "lm", color = "pink") + labs(title = "Emissions from Motor Vehicles in Baltimore [1999, 2002, 2005, 2008]") + labs(x = "Year", y = "Total Emmission [in tons]")
+g + geom_point(color = "steelblue", size = 3) + geom_smooth(method = "lm", color = "red") + labs(title = "Emissions from Motor Vehicles in Baltimore [1999, 2002, 2005, 2008]") + labs(x = "Year", y = "Total Emmission [in tons]")
 
 # Emissions from motor vehicle sources have decreased generally from 1999–2008 in Baltimore City. The city saw an uptick in motor vehicle emissions from 2002  to 2005.
 dev.off()

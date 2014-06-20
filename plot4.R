@@ -282,6 +282,7 @@ which(U == 10101901)
 
 
 # Putting all together to subset NEI and investigate trends
+# Based on the analysis, I chose to go with the data from Step 12
 
 coalCombSCC <- data.frame(rbind(coalCombBySector, nameOnlyCoal))
 str(coalCombSCC)
@@ -309,7 +310,7 @@ png("plot4.png", width=560, height=560)
 library(ggplot2)
 
 g <- qplot(year, Emissions, data = totalCoal)
-g + geom_point (color = "steelblue") + geom_smooth (method = "lm", color = "pink") + labs(title = "Emissions from Coal Combustion in US") + labs(x = "Year", y = "Total Emmission from Coal Combustion [in tons]")
+g + geom_point (color = "steelblue", size = 3) + geom_smooth (method = "lm", color = "red") + labs(title = "Emissions from Coal Combustion in US") + labs(x = "Year", y = "Total Emmission from Coal Combustion [in tons]")
 
 # Overall, we have a drecrease in emissions from coal combustion in the US. However, there was an increase in emissions from 2002 to 2005.
 
